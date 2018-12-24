@@ -1,5 +1,6 @@
-import p5 from "p5";
-
-function setup() {}
+function setup() {
+    createCanvas(800, 800);
+    background(100);
+}
 
 function draw() {}

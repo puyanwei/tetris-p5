@@ -13,8 +13,8 @@ function setup() {
 
 function draw() {
     background(100);
-    currentTetominoes[0].show();
     currentTetominoes[0].update();
+    currentTetominoes[0].show();
     console.log(currentTetominoes[0].hasLanded());
     if (currentTetominoes[0].hasLanded()) {
         currentTetominoes.pop(1);
@@ -24,13 +24,13 @@ function draw() {
 
 function keyPressed() {
     if (keyCode === LEFT_ARROW) {
-        tetromino.setDir(-gridSize, 0);
+        currentTetominoes[0].setDir(-gridSize, 0);
     }
     if (keyCode === RIGHT_ARROW) {
-        tetromino.setDir(gridSize, 0);
+        currentTetominoes[0].setDir(gridSize, 0);
     }
     if (keyCode === DOWN_ARROW) {
-        tetromino.setDir(0, gridSize * 2);
+        currentTetominoes[0].setDir(0, gridSize * 2);
     }
     if (keyCode === UP_ARROW) {
         // TODO goes straight to bottom
@@ -38,7 +38,12 @@ function keyPressed() {
 }
 
 function createTetrimino() {
-    let piece = new Tetromino(width / 2 - gridSize, 0, gridSize, gridSize);
+    let piece = new Tetromino(
+        width / 2 - gridSize,
+        -gridSize,
+        gridSize,
+        gridSize
+    );
     currentTetominoes.push(piece);
 }
 

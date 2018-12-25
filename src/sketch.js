@@ -4,14 +4,29 @@ function setup() {
     canvas = createCanvas(400, 800);
     centerCanvas();
 
-    frameRate(5);
-    tetromino = new Tetromino(0, 0);
+    frameRate(500);
+    tetromino = new Tetromino(0, 0, 40, 40);
 }
 
 function draw() {
     background(100);
-    tetromino.show(50, 50);
+    tetromino.show();
     tetromino.update();
+}
+
+function keyPressed() {
+    if (keyCode === LEFT_ARROW) {
+        tetromino.setDir(-1, 0);
+    }
+    if (keyCode === RIGHT_ARROW) {
+        tetromino.setDir(1, 0);
+    }
+    if (keyCode === DOWN_ARROW) {
+        tetromino.setDir(0, 1);
+    }
+    if (keyCode === UP_ARROW) {
+        tetromino.setDir(0, -1);
+    }
 }
 
 function centerCanvas() {

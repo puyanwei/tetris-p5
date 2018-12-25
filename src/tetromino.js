@@ -23,7 +23,18 @@ class Tetromino {
         this.xDir = 0;
         this.y += this.yDir;
         this.yDir = gridSize;
+        this.constrainToBorders();
+        this.hasLanded()
+            ? new Tetromino(width / 2 - gridSize, 0, gridSize, gridSize)
+            : null;
+    }
+
+    constrainToBorders() {
         this.x = constrain(this.x, 0, width - this.width);
         this.y = constrain(this.y, 0, height - this.height);
+    }
+
+    hasLanded() {
+        return this.y >= height - this.height;
     }
 }

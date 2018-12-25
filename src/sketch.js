@@ -1,4 +1,6 @@
 let canvas, tetromino, gridSize;
+let board = new Array();
+let currentTetominoes = new Array();
 
 function setup() {
     canvas = createCanvas(440, 800);
@@ -6,14 +8,18 @@ function setup() {
 
     frameRate(5); // Initial speed of level
     gridSize = 40;
-    tetromino = new Tetromino(width / 2 - gridSize, 0, gridSize, gridSize);
+    createTetrimino();
 }
 
 function draw() {
     background(100);
-    tetromino.show();
-    tetromino.update();
-    console.log(tetromino.xDir, tetromino.yDir, tetromino.x, tetromino.y);
+    currentTetominoes[0].show();
+    currentTetominoes[0].update();
+    console.log(currentTetominoes[0].hasLanded());
+    if (currentTetominoes[0].hasLanded()) {
+        currentTetominoes.pop(1);
+        createTetrimino();
+    }
 }
 
 function keyPressed() {
@@ -27,8 +33,13 @@ function keyPressed() {
         tetromino.setDir(0, gridSize * 2);
     }
     if (keyCode === UP_ARROW) {
-        // goes straight to bottom
+        // TODO goes straight to bottom
     }
+}
+
+function createTetrimino() {
+    let piece = new Tetromino(width / 2 - gridSize, 0, gridSize, gridSize);
+    currentTetominoes.push(piece);
 }
 
 function centerCanvas() {

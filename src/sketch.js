@@ -1,36 +1,38 @@
-let canvas, tetromino, gridSize;
-let board = new Array();
-let currentTetominoes = new Array();
+let canvas, tetromino, gridSize, board;
+let fallingTetominoes = new Array();
 
 function setup() {
-    canvas = createCanvas(440, 800);
+    canvas = createCanvas(400, 800);
     centerCanvas();
 
-    frameRate(5); // Initial speed of level
     gridSize = 40;
+    board = new Board(width / gridSize, height / gridSize);
+    frameRate(5); // Initial speed of level
+    board.initialize();
     createTetrimino();
 }
 
 function draw() {
     background(100);
-    currentTetominoes[0].update();
-    currentTetominoes[0].show();
-    console.log(currentTetominoes[0].hasLanded());
-    if (currentTetominoes[0].hasLanded()) {
-        currentTetominoes.pop(1);
+    fallingTetominoes[0].update();
+    fallingTetominoes[0].show();
+    if (fallingTetominoes[0].hasLanded()) {
+        // board.update(fallingTetominoes[0].x, fallingTetominoes[0].y)
+        fallingTetominoes.pop(1);
         createTetrimino();
     }
+    board.show();
 }
 
 function keyPressed() {
     if (keyCode === LEFT_ARROW) {
-        currentTetominoes[0].setDir(-gridSize, 0);
+        fallingTetominoes[0].setDir(-gridSize, 0);
     }
     if (keyCode === RIGHT_ARROW) {
-        currentTetominoes[0].setDir(gridSize, 0);
+        fallingTetominoes[0].setDir(gridSize, 0);
     }
     if (keyCode === DOWN_ARROW) {
-        currentTetominoes[0].setDir(0, gridSize * 2);
+        fallingTetominoes[0].setDir(0, gridSize * 2);
     }
     if (keyCode === UP_ARROW) {
         // TODO goes straight to bottom
@@ -44,7 +46,7 @@ function createTetrimino() {
         gridSize,
         gridSize
     );
-    currentTetominoes.push(piece);
+    fallingTetominoes.push(piece);
 }
 
 function centerCanvas() {

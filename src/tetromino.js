@@ -5,7 +5,7 @@ class Tetromino {
         this.height = height;
         this.width = width;
         this.xDir = 0;
-        this.yDir = 0;
+        this.yDir = gridSize;
     }
 
     setDir(x, y) {
@@ -20,7 +20,9 @@ class Tetromino {
 
     update() {
         this.x += this.xDir;
+        this.xDir = 0;
         this.y += this.yDir;
+        this.yDir = gridSize;
         this.x = constrain(this.x, 0, width - this.width);
         this.y = constrain(this.y, 0, height - this.height);
     }

@@ -1,31 +1,33 @@
-let canvas, tetromino;
+let canvas, tetromino, gridSize;
 
 function setup() {
-    canvas = createCanvas(400, 800);
+    canvas = createCanvas(440, 800);
     centerCanvas();
 
-    frameRate(500);
-    tetromino = new Tetromino(0, 0, 40, 40);
+    frameRate(5); // Initial speed of level
+    gridSize = 40;
+    tetromino = new Tetromino(width / 2 - gridSize, 0, gridSize, gridSize);
 }
 
 function draw() {
     background(100);
     tetromino.show();
     tetromino.update();
+    console.log(tetromino.xDir, tetromino.yDir, tetromino.x, tetromino.y);
 }
 
 function keyPressed() {
     if (keyCode === LEFT_ARROW) {
-        tetromino.setDir(-1, 0);
+        tetromino.setDir(-gridSize, 0);
     }
     if (keyCode === RIGHT_ARROW) {
-        tetromino.setDir(1, 0);
+        tetromino.setDir(gridSize, 0);
     }
     if (keyCode === DOWN_ARROW) {
-        tetromino.setDir(0, 1);
+        tetromino.setDir(0, gridSize * 2);
     }
     if (keyCode === UP_ARROW) {
-        tetromino.setDir(0, -1);
+        // goes straight to bottom
     }
 }
 

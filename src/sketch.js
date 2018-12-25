@@ -1,9 +1,17 @@
-let canvas;
+let canvas, tetromino;
 
 function setup() {
     canvas = createCanvas(400, 800);
-    background(100);
     centerCanvas();
+
+    frameRate(5);
+    tetromino = new Tetromino(0, 0);
+}
+
+function draw() {
+    background(100);
+    tetromino.show(50, 50);
+    tetromino.update();
 }
 
 function centerCanvas() {
@@ -15,5 +23,3 @@ function centerCanvas() {
 function windowResized() {
     centerCanvas();
 }
-
-function draw() {}

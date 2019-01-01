@@ -1,5 +1,5 @@
 let canvas, tetromino, gridSize, board;
-let fallingTetominoes = new Array();
+let fallingTetrominoes = new Array();
 
 function setup() {
     canvas = createCanvas(400, 800);
@@ -13,14 +13,11 @@ function setup() {
 }
 
 function draw() {
+    let fallingTetromino = fallingTetrominoes[0];
     background(100);
-    fallingTetominoes[0].update();
-    fallingTetominoes[0].show();
-    if (fallingTetominoes[0].hasLanded()) {
-        // board.update(fallingTetominoes[0].x, fallingTetominoes[0].y)
-        fallingTetominoes.pop(1);
-        createTetrimino();
-    }
+    fallingTetromino.update();
+    fallingTetromino.show();
+    checkIfLanded(fallingTetromino);
     board.show();
 }
 
@@ -46,7 +43,17 @@ function createTetrimino() {
         gridSize,
         gridSize
     );
-    fallingTetominoes.push(piece);
+    fallingTetrominoes.push(piece);
+}
+
+function checkIfLanded(fallingTetromino) {
+    if (fallingTetromino.hasLanded()) {
+        board.update(fallingTetromino.x, fallingTetromino.y);
+        fallingTetrominoes.pop(1);
+        // TODO gotta move this tetromino object to the board object
+        // board.update()
+        createTetrimino();
+    }
 }
 
 function centerCanvas() {

@@ -1,23 +1,23 @@
 let canvas, tetromino, gridSize, board;
-let fallingTetrominoes = new Array();
+let fallingShapes = new Array();
 
 function setup() {
     canvas = createCanvas(400, 800);
     centerCanvas();
+    frameRate(5); // Initial speed of level
 
     gridSize = 40;
     board = new Board(width / gridSize, height / gridSize);
-    frameRate(5); // Initial speed of level
     board.initialize();
-    createTetrimino();
+    createShape();
 }
 
 function draw() {
-    let fallingTetromino = fallingTetrominoes[0];
+    let fallingShape = fallingShapes[0];
     background(100);
-    fallingTetromino.update();
-    fallingTetromino.show();
-    checkIfLanded(fallingTetromino);
+    fallingShape.update();
+    fallingShape.show();
+    checkIfLanded(fallingShape);
     board.show();
 }
 
@@ -36,23 +36,22 @@ function keyPressed() {
     }
 }
 
-function createTetrimino() {
+function createShape() {
     let piece = new Tetromino(
         width / 2 - gridSize,
         -gridSize,
         gridSize,
         gridSize
     );
-    fallingTetrominoes.push(piece);
+    fallingShapes.push(piece);
 }
 
-function checkIfLanded(fallingTetromino) {
-    if (fallingTetromino.hasLanded()) {
-        board.update(fallingTetromino.x, fallingTetromino.y);
-        fallingTetrominoes.pop(1);
+function checkIfLanded(fallingShape) {
+    if (fallingShape.hasLanded()) {
+        board.update(fallingShape.x, fallingShape.y);
+        fallingShapes.pop(1);
         // TODO gotta move this tetromino object to the board object
-        // board.update()
-        createTetrimino();
+        createShape();
     }
 }
 

@@ -6,20 +6,22 @@ class Board {
     }
 
     initialize() {
-        let colsArray = new Array(this.columns).fill(new Cell(false));
+        let cell = new Cell();
+        let colsArray = new Array(this.columns).fill(cell);
         this.grid = new Array(this.rows).fill(colsArray);
     }
 
     update(cellX, cellY) {
-        console.log(cellX, cellY);
-        noLoop();
+        let indexX = cellX / gridSize;
+        let indexY = cellY / gridSize;
+        console.log(this.grid, indexX - 2, indexY - 1);
+        this.grid[indexX - 1][indexY - 1].isTaken = true;
+        console.log(this.grid);
     }
 
     show() {
-        console.log(this.grid);
         this.grid.map((row, rowIndex) => {
-            row.map((cell, colIndex) => {
-                console.log(cell, rowIndex * gridSize, colIndex * gridSize);
+            row.map((singleCell, colIndex) => {
                 noFill();
                 rect(
                     colIndex * gridSize,

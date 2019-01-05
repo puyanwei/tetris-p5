@@ -18,7 +18,7 @@ function draw() {
     fallingShape.update();
     fallingShape.show();
     checkIfLanded(fallingShape);
-    board.show();
+    // board.show();
 }
 
 function keyPressed() {
@@ -49,9 +49,10 @@ function createShape() {
 function checkIfLanded(fallingShape) {
     if (fallingShape.hasLanded()) {
         board.update(fallingShape.x, fallingShape.y);
-        fallingShapes.pop(1);
         // TODO gotta move this tetromino object to the board object
-        createShape();
+        fallingShapes.pop(1);
+        noLoop();
+        // createShape();
     }
 }
 

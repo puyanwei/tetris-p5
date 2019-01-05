@@ -1,6 +1,6 @@
 class Cell {
-    constructor(taken) {
-        this.taken = taken;
+    constructor() {
+        this.taken = false;
         this.top = false;
     }
 }

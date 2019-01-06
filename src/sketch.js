@@ -18,7 +18,7 @@ function draw() {
     fallingShape.update();
     fallingShape.show();
     checkIfLanded(fallingShape);
-    // board.show();
+    board.show();
 }
 
 function keyPressed() {

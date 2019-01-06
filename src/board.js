@@ -14,15 +14,15 @@ class Board {
     update(cellX, cellY) {
         let indexX = cellX / gridSize;
         let indexY = cellY / gridSize;
-        console.log(this.grid, indexX - 2, indexY - 1);
-        this.grid[indexX - 1][indexY - 1].isTaken = true;
+        console.log(indexX, indexY, this.grid, this.grid[indexY][indexX]);
+        this.grid[indexY][indexX].isTaken = true;
         console.log(this.grid);
     }
 
     show() {
         this.grid.map((row, rowIndex) => {
             row.map((singleCell, colIndex) => {
-                noFill();
+                singleCell.isTaken ? fill(255) : noFill();
                 rect(
                     colIndex * gridSize,
                     rowIndex * gridSize,

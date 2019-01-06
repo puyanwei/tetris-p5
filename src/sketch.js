@@ -45,6 +45,7 @@ function checkIfLanded(fallingShape) {
 	if (fallingShape.hasLanded()) {
 		board.update(fallingShape.x, fallingShape.y);
 		// TODO gotta move this tetromino object to the board object
+		console.log(this.board.grid);
 		fallingShapes.pop(1);
 		noLoop();
 		// createShape();

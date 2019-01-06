@@ -8,23 +8,32 @@ class Board {
 	initialize() {
 		let cell = new Cell();
 
-		let array = [];
-		let cols = [];
+		// let array = [];
+		// let cols = [];
 
-		for (let i = 0; i < this.columns; i++) {
-			cols = this.immutablePush(cols, cell);
-		}
+		// for (let i = 0; i < this.columns; i++) {
+		// 	cols = this.immutablePush(cols, cell);
+		// }
 
-		for (let i = 0; i < this.rows; i++) {
-			array = this.immutablePush(array, cols);
-		}
+		// for (let i = 0; i < this.rows; i++) {
+		// 	array = this.immutablePush(array, cols);
+		// }
 
-		this.grid = array;
-		console.log(array, cols);
+		// this.grid = array;
+		// console.log(array, cols);
+		let arrayRow = Array.from({ length: this.columns }, () => {
+			return cell;
+		});
 
-		// let columnArray = Array.from({ length: this.columns }, (element) => ...cell);
-		// this.grid = Array.from({ length: this.rows }, (element) => ...columnArray);
+		let arrayOfRows = Array.from({ length: this.rows }, () => arrayRow);
+		this.grid = arrayOfRows;
 	}
+
+	//     var fruits = Array.from(
+	//         { length: 4 },
+	//         () => ({ Lemon: 'Lemon' })
+	//     );
+	// console.log(fruits);
 
 	immutablePush(array, element) {
 		return [ ...array, element ];
